@@ -8,14 +8,14 @@ if ball is detected then we will print it in serial
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);       //Starts serial monitor
+  Serial.begin(9600);       //Starts serial monitor
   BLEDevice::init("");        //Initializes BLE --- not scanner does not need name
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   BLEScan* pBLEScan = BLEDevice::getScan();
-  pBLEScan->setActiveScan(true);        //Actice scan function is to get details such as device name
+  pBLEScan->setActiveScan(true);        //Active scan function is to get details such as device name
 
   //will scan for 2 seconds
   BLEScanResults results = pBLEScan->start(2);
@@ -26,7 +26,7 @@ void loop() {
 
     //get device name and strength from signal
     String name = device.getName().c_str();
-    int rssi = device.getRSSI();
+    int rssi = device.getRSSI();        //radio signal strength valued in dBm or decibels relative to 1 milliwatt
 
     //Check if it is desired device
     if(name.startsWith("Dragon_Ball")){
